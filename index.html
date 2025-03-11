@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Restaurante</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<bodya>
+    <header>
+        <h1>Restaurante Tarcísio</h1>
+    </header>
+    <div id="pop-up">
+        <div id="conteudo-popup">
+            <span id="close" onclick="fechar()">&times;</span>
+            <h2>Este é um pop-up!</h2>
+            <p>Você pode adicionar conteúdo aqui.</p>
+        </div>
+    </div>
+    <section>
+        
+        <div id="cafemanha">
+            <img src="./src/imagens/cafe_da_manha.jpg" alt="Café da Manhã">
+            <p>Café e Lanches</p>
+        </div>
+        <div class="menu menu1">
+            <div class="prod">
+                <img src="./src/imagens/cafe_preto.jpg" alt="Café Preto">
+                <p>Café Preto..................R$ 2,99</p>
+                <input type="number" name="cafe_preto" id="cafe_preto" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/cafecomleite.jpg" alt="Café com Leite">
+                <p>Café com Leite..............R$ 5,99</p>
+                <input type="number" name="cafecleite" id="cafecleite" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/cafecomcremeeleite.jpg" alt="Café com Creme e leite">
+                <p>Café com Creme e Leite......R$ 8,99</p>
+                <input type="number" name="cafeccreme" id="cafeccreme" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/bolodechocolate.jpg" alt="Bolo de Chocolate">
+                <p>Bolo de Chocolate...........R$ 5,50</p>
+                <input type="number" name="bolochoc" id="bolochoc" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/paodequeijo.jpg" alt="Pão de Queijo">
+                <p>Pão de Queijo...............R$ 3,00</p>
+                <input type="number" name="paoqueijo" id="paoqueijo" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/donuts.jpg" alt="Donuts">
+                <p>Donuts......................R$ 4,50</p>
+                <input type="number" name="donuts" id="donuts" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/mistoquente.jpg" alt="Misto Quente">
+                <p>Misto Quente...............R$ 12,00</p>
+                <input type="number" name="mistoquente" id="mistoquente" min="0">
+            </div>
+            <div class="fecha1 fechamenu">^</div>
+        </div>
+        <div id="jantaalmo">
+            <img src="./src/imagens/mesa_posta.jpg" alt="Mesa posta">
+            <p>Almoço / Jantar</p>
+        </div>
+        <div class="menu menu2">
+            <div class="prod">
+                <img src="./src/imagens/filedefrango.jpg" alt="Filé de Frango">
+                <p>Filé de Frango........R$ 25,00</p>
+                <input type="number" name="filefrango" id="filefrango" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/filedepeixe.jpg" alt="Filé de Peixe">
+                <p>Filé de Peixe.........R$ 28,00</p>
+                <input type="number" name="filepeixe" id="filepeixe" min="0">
+            </div>
+            <div class="prod">
+                <img src="src/imagens/bifedevaca.jpg" alt="Bife de Vaca">
+                <p>Bife de Vaca..........R$ 30,00</p>
+                <input type="number" name="bifevaca" id="bifevaca" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/carnedeporco.jpg" alt="Bife de Porco">
+                <p>Bife de Porco.........R$ 30,00</p>
+                <input type="number" name="carneporco" id="carneporco" min="0">
+            </div>
+            <div class="fecha2 fechamenu">^</div>
+        </div>
+        <div id="bebidas">
+            <img src="./src/imagens/garrafasgelo.jpg" alt="Garrafas no Gelo">
+            <p>Bebidas</p>
+        </div>
+        <div class="menu menu3">
+            <div class="prod">
+                <img src="./src/imagens/latacoca.jpg" alt="Lata de Coca-Cola">
+                <p>Lata de Coca-Cola..........R$ 9,00</p>
+                <input type="number" name="coca" id="coca" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/lataguarana.jpg" alt="Lata de Guaraná Antártica">
+                <p>Lata de Guaraná Antártica..R$ 9,00</p>
+                <input type="number" name="guara" id="guara" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/latas_sprite.jpg" alt="Lata de Sprite">
+                <p>Lata de Sprite.............R$ 8,00</p>
+                <input type="number" name="sprite" id="sprite" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/jarrasucolaranja.jpg" alt="Jarra de Suco de Laranja">
+                <p>Jarra de Suco de Laranja...R$ 16,00</p>
+                <input type="number" name="laranja" id="laranja" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/jarraacerola.jpg" alt="Jarra de Suco de Acerola">
+                <p>Jarra de Suco de Acerola...R$ 16,00</p>
+                <input type="number" name="acerola" id="acerola" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/latas_skol.jpg" alt="Lata de Cerveja Skol">
+                <p>Lata de Cerveja Skol.......R$ 6,00</p>
+                <input type="number" name="skol" id="skol" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/latabrahma.jpg" alt="Lata de Cerveja Brahma">
+                <p>Lata de Cerveja Brahma.....R$ 6,00</p>
+                <input type="number" name="brahma" id="brahma" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/longneckheineken.jpg" alt="Longneck Heineken">
+                <p>Longneck Heineken..........R$ 10,00</p>
+                <input type="number" name="heine" id="heine" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/garrafacorona.jpg" alt="Longneck Corona">
+                <p>Longneck Corona............R$ 12,00</p>
+                <input type="number" name="corona" id="corona" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/vodkaconceito.jpg" alt="Vodka">
+                <p>Dose de Vodka..............R$ 3,00</p>
+                <input type="number" name="vodka" id="vodka" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/wiskyevodka.jpg" alt="Wisky">
+                <p>Dose de Wisky..............R$ 8,00</p>
+                <input type="number" name="wisky" id="wisky" min="0">
+            </div>
+            <div class="fecha3 fechamenu">^</div>
+        </div>
+        <div id="porcoes">
+            <img src="./src/imagens/porcoes.jpg" alt="Mesa de Porções">
+            <p>Porções</p>
+        </div>
+        <div class="menu menu4">
+            <div class="prod">
+                <img src="./src/imagens/batatafrita.jpg" alt="Batata Frita">
+                <p>Batata Palito Frita......R$ 25,00</p>
+                <input type="number" name="frita" id="frita" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/batatafritabacon.jpg" alt="Batata Frita com Bacon">
+                <p>Batata Frita com Bacon...R$ 32,00</p>
+                <input type="number" name="fritabacon" id="fritabacon" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/carneassada.jpg" alt="Carne Assada">
+                <p>Carne Assada.............R$ 40,00</p>
+                <input type="number" name="assada" id="assada" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/espetinho.jpg" alt="Espetinho">
+                <p>Espetinho com Mandioca...R$ 32,00</p>
+                <input type="number" name="espetinho" id="espetinho" min="0">
+            </div>
+            <div class="prod">
+                <img src="./src/imagens/sanduiche.jpg" alt="Sanduiche">
+                <p>Sanduiche................R$ 26,00</p>
+                <input type="number" name="xtudo" id="xtudo" min="0">
+            </div>
+            <div class="fecha4 fechamenu">^</div>
+        </div>
+    </section>
+    
+    <section>
+        <button id="somar" onclick="somar()">Somar Total</button>
+    </section>
+    <footer>&copy; Tarcísio</footer>
+  
+    <script src="./script.js"></script>  
+</body>
+</html>
