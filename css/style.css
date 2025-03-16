@@ -130,7 +130,7 @@ div p{
     font-size: 40px;
 }
 
-@media (max-width: 400px){
+@media (max-width: 768px){
     body{
         margin: 0;
     }
