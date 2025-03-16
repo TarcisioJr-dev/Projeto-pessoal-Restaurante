@@ -11,7 +11,7 @@ footer{
     float: right;
 }
 h1{
-    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
     font-size: 35pt;
 }
 
@@ -128,4 +128,63 @@ div p{
 
 #emoji{
     font-size: 40px;
+}
+
+@media (max-width: 400px){
+    body{
+        margin: 0;
+    }
+    h1 {
+        font-size: 25pt;
+    }
+    .imgMenu{
+        position: absolute;
+        width: 100%;
+        align-self: stretch;
+    }
+    .imgPrincipal{
+        position: static;
+        align-self: stretch;
+        max-width: 200px;
+    }
+    p {
+        font: normal 10pt times;
+        text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+        color:white;
+        z-index: 2;
+    }
+    .titulo{
+        text-shadow: none;
+        color: black;
+    }
+    input{
+        z-index: 2;
+    }
+    .prod{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        float: right;
+        overflow: hidden;
+        position: relative;
+    }
+    #conteudo-popup{
+        width: 80%;
+        max-height: 80%;
+    }
+    #pop-up{
+        display: none;
+    }
+    #cafemanha, #jantaalmo, #bebidas, #porcoes{
+        width: 80%;
+    }
+    .menu{
+        width: 70%;
+    }
+    .prod{
+        width: 90%;
+    }
+    .fechamenu{
+        width: 100%;
+    }
 }
