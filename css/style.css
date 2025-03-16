@@ -130,7 +130,7 @@ div p{
     font-size: 40px;
 }
 
-@media (max-width: 768px){
+@media only screen and (max-width: 768px){
     body{
         margin: 0;
     }
@@ -141,11 +141,12 @@ div p{
         position: absolute;
         width: 100%;
         align-self: stretch;
+        z-index: 0;
     }
     .imgPrincipal{
         position: static;
         align-self: stretch;
-        max-width: 200px;
+        max-width: 60%;
     }
     p {
         font: normal 10pt times;
