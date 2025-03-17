@@ -45,6 +45,8 @@ var cupom = ''
 var cont = 1
 var compras = ''
 let total = 0
+let valorParcela = 0
+let valorPago = 0
 
 function somar(){
   popup.style.display = 'block'
@@ -234,7 +236,7 @@ function somar(){
     somatotal = Number(total)
     cupom += `<br>Deseja finalizar a compra ou comprar mais?</p>`
     cupom += `<br>`
-    cupom += '<p class="titulo"><button id="pagar" onclick="pagar()">Pagar</button>   '
+    cupom += '<p class="titulo"><button id="pagar" onclick="formaPagamento()">Pagar</button>   '
     cupom += '<button id="comprar" onclick="fechar()">Comprar</button></p>'
     res.innerHTML = cupom
     
@@ -262,13 +264,157 @@ let vlrpago = 0
 function pagar(){
   cupom += '<p class="titulo">Informe o valor para pagamento:</p>'
   cupom += '<p class="titulo">R$<input type="number" name="vlrpago" id="vlrpago" autofocus min="0">  '
-  cupom += '<button id="procpagar" onclick="processarpagamento()">Pagar</button></p>'
+  cupom += '<p class="titulo"><button id="procpagar" onclick="processarpagamento()">Pagar</button>'
+  cupom += '  <button onclick="formaPagamento()">Voltar</button></p>'
   res.innerHTML = cupom
+}
+
+function formaPagamento(){
+  cupom =`<p class="titulo">Escolha o Método Pagamento:</p>`
+  cupom +='<div id="modoPagamento">'
+  cupom +=`<input type="radio" name="modoPagamento" value="dinheiro" checked>`
+  cupom +='<label for="dinheiro">Dinheiro</label>'
+  cupom +=`<input type="radio" name="modoPagamento" value="pix">`
+  cupom +='<label for="pix">PIX</label>'
+  cupom +=`<input type="radio" name="modoPagamento" value="cartao">`
+  cupom +='<label for="cartao">Cartão</label>'
+  cupom +='</div>'
+  cupom +=`<button onclick="redirecionar()">Continuar</button>`
+
+  res.innerHTML = cupom
+}
+
+function redirecionar(){
+  let modoPagamento = document.querySelector('input[name="modoPagamento"]:checked').value
+  switch (modoPagamento){
+    case 'dinheiro':
+      cupom = ''
+      cupom += `<p class="titulo">O valor total da compra foi R$${total.toFixed(2)}</p><br>`
+      pagar()
+      break
+    case 'pix':
+      cupom = ''
+      cupom += `<p class="titulo">O valor total da compra foi R$${total.toFixed(2)}</p><br>`
+      pix()
+      break
+    case 'cartao':
+      cupom = ''
+      cupom += `<p class="titulo">O valor total da compra foi R$${total.toFixed(2)}</p><br>`
+      cadastrarCartao()
+      break
+  }
+}
+
+function pix(){
+  cupom = `<p class="titulo">PIX:</p>`
+  cupom += `<img src="./src/imagens/qr_code.avif" alt="qr-code">`
+  cupom += `<p class="titulo">Insira o comprovante abaixo:</p>`
+  cupom += `<p class="titulo"><input type="file" name="comprovantePix" id="comprovantePix" required></p>`
+  cupom += `<p class="titulo">Insira seu telefone para confirmação pix</p>`
+  cupom += `<p class="titulo"><input type="tel" name="telefonePix" id="telefonePix" required placeholder="(99) 9 9999-9999"></p>`
+  cupom += `<p class="titulo"><button onclick="processarPagamentoPix()">Finalizar</button>`
+  cupom += `  <button onclick="formaPagamento()">Voltar</button></p>`
+  res.innerHTML = cupom
+}
+
+function processarPagamentoPix(){
+  let comprovantePix = document.getElementById('comprovantePix').value
+  let telefonePix = document.getElementById('telefonePix').value
+  if(comprovantePix == '' || telefonePix == ''){
+    alert('Preencha todos os campos para continuar!')
+  }else{
+    cupomfinal += '<hr>'
+    cupomfinal += '<p class="titulo">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</p>'
+    cupomfinal += `<p class="titulo">O valor total pago foi R$${somatotal.toFixed(2)}</p>`
+    cupomfinal += `<p class="titulo">Pago com o PIX</p>`
+    cupomfinal += `<p class="titulo">Obrigado por comprar conosco! \u{1F601}</p>`
+    cupomfinal += '<hr>'
+    cupomfinal += `<p class="titulo"><button onclick="finalizar()">Finalizar</button>`
+    res.innerHTML = cupomfinal
+  }
+}
+
+
+function cadastrarCartao(){
+  
+  cupom+='<input type="text" name="numeroCartao" id="numeroCartao" required placeholder="Número do Cartão">'
+  cupom+='<input type="text" name="nomeCartao" id="nomeCartao" required placeholder="Nome do Titular"> '
+  cupom+='<input type="text" name="validadeCartao" id="validadeCartao" required placeholder="Validade">'
+  cupom+='<input type="text" name="cvvCartao" id="cvvCartao" required placeholder="CVV"></input>'
+  
+  let juro = 5
+  let valorIntermediario = 0
+  cupom+='<select name="parcelar" id="parcelar">'
+  switch (Number(somatotal)){
+    default:
+      cupom+=`<option value="debito" selected>Débito</option>`
+      cupom+=`<option value="1">1 parcela X ${somatotal.toFixed(2)} = ${somatotal.toFixed(2)}</option>`
+      cupom+=`<option value="2">2 parcelas X ${(somatotal/2).toFixed(2)} = ${somatotal.toFixed(2)}</option>`
+      cupom+=`<option value="3">3 parcelas X ${(somatotal/3).toFixed(2)} = ${somatotal.toFixed(2)}</option>`
+      cupom+=`<option value="4">4 parcelas X ${(somatotal/4).toFixed(2)} = ${somatotal.toFixed(2)}</option>`
+      cupom+=`<option value="5">5 parcelas X ${(somatotal/5).toFixed(2)} = ${somatotal.toFixed(2)}</option>`
+      for(let cont = 6; cont <= 10; cont++){
+        valorIntermediario = somatotal / cont
+        valorPago = (valorIntermediario + (valorIntermediario / 100) * juro) * cont
+        valorParcela = valorPago / cont
+        cupom+=`<option value="${cont}">${cont} parcelas X ${valorParcela.toFixed(2)}<sub>+ ${juro}%</sub> = ${valorPago.toFixed(2)}</option>`
+        juro += 5
+      }
+      break;
+  }
+  cupom+='</select>'
+  cupom+='<p class="titulo"><button id="procpagar" onclick="processarPagamentoCartao()">Pagar</button>'
+  cupom += `  <button onclick="formaPagamento()">Voltar</button></p>`
+  res.innerHTML = cupom
+  
+}
+
+function processarPagamentoCartao(){
+  let numeroCartao = document.getElementById('numeroCartao').value
+  let nomeCartao = document.getElementById('nomeCartao').value
+  let validadeCartao = document.getElementById('validadeCartao').value
+  let cvvCartao = document.getElementById('cvvCartao').value
+  let parcelar = document.getElementById('parcelar').value
+
+  if(nomeCartao == '' || numeroCartao == '' || validadeCartao == '' || cvvCartao == ''){
+    alert('Preencha todos os campos para continuar!')
+  }else{
+    switch (parcelar){
+      case 'debito':
+        cupomfinal = ''
+        cupomfinal += 'As compras feitas foram:'
+        cupomfinal += compras
+        cupomfinal += '<hr>'
+        cupomfinal += '<p class="titulo">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</p>'
+        cupomfinal += `<p class="titulo">O valor total pago foi R$${somatotal.toFixed(2)}</p>`
+        cupomfinal += `<p class="titulo">Com o Cartão de Débito</p>`
+        cupomfinal += `<p class="titulo">Obrigado por comprar conosco! \u{1F601}</p>`
+        cupomfinal += '<hr>'
+        cupomfinal += `<p class="titulo"><button onclick="finalizar()">Finalizar</button>`
+        res.innerHTML = cupomfinal
+        break
+      default:
+        valorPago = valorParcela * Number(parcelar)
+        cupomfinal = ''
+        cupomfinal += 'As compras feitas foram:'
+        cupomfinal += compras
+        cupomfinal += '<hr>'
+        cupomfinal += '<p class="titulo">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</p>'
+        cupomfinal += `<p class="titulo">O valor total pago foi R$${valorPago.toFixed(2)}</p>`
+        cupomfinal += `<p class="titulo">Parcelado em ${parcelar} vezes</p>`
+        cupomfinal += `<p class="titulo">O valor da parcela é R$${valorParcela.toFixed(2)}</p>`
+        cupomfinal += `<p class="titulo">Obrigado por comprar conosco! \u{1F601}</p>`
+        cupomfinal += '<hr>'
+        cupomfinal += `<p class="titulo"><button onclick="finalizar()">Finalizar</button>`
+        res.innerHTML = cupomfinal
+    } 
+  }
 }
 
 function processarpagamento(){
   c ++
   vlrpago = Number(document.getElementById('vlrpago').value)
+  
   if(vlrpago == 0){
     alert('Insira um valor válido para continuar!')
   }else{
@@ -279,12 +425,12 @@ function processarpagamento(){
       cupom = `<p class="titulo">O valor restante para pagamento é R$${restante.toFixed(2)}</p>`
       pagar()
     }else{
-      cupomfinal += '<br>---------------------------------------'
+      cupomfinal += '<hr>'
       cupomfinal += '<p class="titulo">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</p>'
       cupomfinal += `<p class="titulo">O valor total pago foi R$${somatroco.toFixed(2)}</p>`
       cupomfinal += `<p class="titulo">O seu troco é: R$${-restante.toFixed(2)}</p>`
       cupomfinal += '<p class="titulo">Obrigado por comprar conosco! \u{1F601}</p>'
-      cupomfinal += '---------------------------------------'
+      cupomfinal += '<hr>'
       cupomfinal += `<p class="titulo"><button onclick="finalizar()">Finalizar</button>`
       res.innerHTML = cupomfinal
     }
