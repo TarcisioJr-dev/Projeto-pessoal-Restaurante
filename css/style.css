@@ -141,7 +141,7 @@ div p{
         position: absolute;
         width: 100%;
         align-self: stretch;
-        z-index: 0;
+        z-index: 1;
     }
     .imgPrincipal{
         position: static;
